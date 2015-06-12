@@ -1340,8 +1340,8 @@ public class KinectManager : MonoBehaviour
 					float displayMapsWidthPercent = DisplayMapsWidthPercent / 100f;
 					float displayMapsHeightPercent = displayMapsWidthPercent * KinectWrapper.GetDepthHeight() / KinectWrapper.GetDepthWidth();
 					
-					float displayWidth = cameraRect.width * displayMapsWidthPercent;
-					float displayHeight = cameraRect.width * displayMapsHeightPercent;
+					float displayWidth = 800;
+					float displayHeight = 800;
 					
 					usersMapRect = new Rect(cameraRect.width - displayWidth, cameraRect.height, displayWidth, -displayHeight);
 				}
@@ -1351,6 +1351,7 @@ public class KinectManager : MonoBehaviour
 
 			else if(ComputeColorMap && (/**(allUsers.Count == 0) ||*/ DisplayColorMap))
 			{
+			
 				if(usersClrRect.width == 0 || usersClrTex.height == 0)
 				{
 					// get the main camera rectangle
@@ -1365,10 +1366,11 @@ public class KinectManager : MonoBehaviour
 					float displayMapsWidthPercent = DisplayMapsWidthPercent / 100f;
 					float displayMapsHeightPercent = displayMapsWidthPercent * KinectWrapper.GetColorHeight() / KinectWrapper.GetColorWidth();
 					
-					float displayWidth = cameraRect.width * displayMapsWidthPercent;
-					float displayHeight = cameraRect.width * displayMapsHeightPercent;
+					float displayWidth = 800;
+					float displayHeight = 800;
 					
 					usersClrRect = new Rect(cameraRect.width - displayWidth, cameraRect.height, displayWidth, -displayHeight);
+
 					
 //					if(ComputeUserMap)
 //					{
