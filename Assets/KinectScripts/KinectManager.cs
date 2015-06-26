@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 using System;
 using System.Collections;
@@ -11,6 +12,9 @@ using System.Text;
 public class KinectManager : MonoBehaviour
 {
 	public enum Smoothing : int { None, Default, Medium, Aggressive }
+
+	// added by kike
+	public RawImage img;
 	
 	// Camera BackGround
 	public bool FixedCameraBackground = false;
@@ -1356,7 +1360,8 @@ public class KinectManager : MonoBehaviour
 					usersMapRect = new Rect(cameraRect.width - displayWidth, cameraRect.height, displayWidth, -displayHeight);
 				}
 
-	            GUI.DrawTexture(usersMapRect, usersLblTex);
+				img.texture = usersLblTex;
+	            // GUI.DrawTexture(usersMapRect, usersLblTex);
 	        }
 
 			else if(ComputeColorMap && (/**(allUsers.Count == 0) ||*/ DisplayColorMap))
@@ -1396,7 +1401,8 @@ public class KinectManager : MonoBehaviour
 //					}
 				}
 
-				GUI.DrawTexture(usersClrRect, usersClrTex);
+				img.texture = usersLblTex;
+				// GUI.DrawTexture(usersClrRect, usersClrTex);
 			}
 		}
     }
