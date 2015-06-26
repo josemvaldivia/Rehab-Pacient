@@ -14,12 +14,6 @@ public class AvatarController : MonoBehaviour
 	// Bool that has the characters (facing the player) actions become mirrored. Default false.
 	public bool mirroredMovement = false;
 	
-	// Kike added this
-	public bool recordMovement = false;
-	public bool loadMovement = false;
-	public string movementFilename = "";
-	private int frame = 0;
-
 	// Bool that determines whether the avatar is allowed to move in vertical direction.
 	public bool verticalMovement = false;
 	
@@ -93,8 +87,7 @@ public class AvatarController : MonoBehaviour
 	
 	// Update the avatar each frame.
     public void UpdateAvatar(uint UserID)
-    {
-    	Debug.Log(UserID);
+    {	
 		if(!transform.gameObject.activeInHierarchy) 
 			return;
 		
@@ -129,7 +122,6 @@ public class AvatarController : MonoBehaviour
 				}
 			}
 		}
-		frame++;
 	}
 	
 	// Set bones to their initial positions and rotations
@@ -201,9 +193,6 @@ public class AvatarController : MonoBehaviour
 		
 		// Get Kinect joint orientation
 		Quaternion jointRotation = kinectManager.GetJointOrientation(userId, iJoint, flip);
-		if (recordMovement) {
-
-		}
 		if(jointRotation == Quaternion.identity)
 			return;
 		

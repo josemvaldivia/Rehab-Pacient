@@ -11,12 +11,13 @@ using System.Text;
 public class KinectManager : MonoBehaviour
 {
 	public enum Smoothing : int { None, Default, Medium, Aggressive }
-
+	
 	// Camera BackGround
 	public bool FixedCameraBackground = false;
+
 	// Public Bool to determine how many players there are. Default of one user.
 	public bool TwoUsers = false;
-
+	
 //	// Public Bool to determine if the sensor is used in near mode.
 //	public bool NearMode = false;
 
@@ -1340,17 +1341,10 @@ public class KinectManager : MonoBehaviour
 					
 					float displayMapsWidthPercent = DisplayMapsWidthPercent / 100f;
 					float displayMapsHeightPercent = displayMapsWidthPercent * KinectWrapper.GetDepthHeight() / KinectWrapper.GetDepthWidth();
-					float displayWidth;
-					float displayHeight;
-					if (FixedCameraBackground){
-						displayWidth = 800;
-						displayHeight = 800;
-					}
-					else{
-						displayWidth = cameraRect.width * displayMapsWidthPercent;
-						displayHeight = cameraRect.width * displayMapsHeightPercent;
-					}
-
+					
+					float displayWidth = 800;
+					float displayHeight = 800;
+					
 					usersMapRect = new Rect(cameraRect.width - displayWidth, cameraRect.height, displayWidth, -displayHeight);
 				}
 
@@ -1374,17 +1368,9 @@ public class KinectManager : MonoBehaviour
 					float displayMapsWidthPercent = DisplayMapsWidthPercent / 100f;
 					float displayMapsHeightPercent = displayMapsWidthPercent * KinectWrapper.GetColorHeight() / KinectWrapper.GetColorWidth();
 					
-					float displayWidth;
-					float displayHeight;
-					if (FixedCameraBackground){
-						displayWidth = 800;
-						displayHeight = 800;
-					}
-					else{
-						displayWidth = cameraRect.width * displayMapsWidthPercent;
-						displayHeight = cameraRect.width * displayMapsHeightPercent;
-					}
-
+					float displayWidth = 800;
+					float displayHeight = 800;
+					
 					usersClrRect = new Rect(cameraRect.width - displayWidth, cameraRect.height, displayWidth, -displayHeight);
 
 					
