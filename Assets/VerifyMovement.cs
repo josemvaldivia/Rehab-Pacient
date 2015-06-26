@@ -5,6 +5,8 @@ public class VerifyMovement : MonoBehaviour {
 
 	
 	public GameObject sourceObject;
+	public GameObject deleteObject;
+	public int index = 0;
 	private Vector3 oldPosition;
 	private Vector3 translateVector = new Vector3 (3.0f, 0.0f , 0.0f);
 	public InteractionWrapper.InteractionHandEventType handEvent = InteractionWrapper.InteractionHandEventType.None;
@@ -30,22 +32,12 @@ public class VerifyMovement : MonoBehaviour {
 			}
 			else
 			{
+				Destroy(deleteObject);
+				Application.LoadLevel(index);
 				print ("ooo");
 			}
 		}
-		/*
-		if (oldPosition.x < sourceObject.transform.position.x)
-		{
 
-			oldPosition = temp;
-			//print("right");
-		}
-		else if (oldPosition.x > sourceObject.transform.position.x)
-		{
-			oldPosition = temp;
-			//print ("left");
-		}
-	*/
 
 	}
 }

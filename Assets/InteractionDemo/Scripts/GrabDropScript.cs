@@ -108,8 +108,10 @@ public class GrabDropScript : MonoBehaviour
 				screenPixelPos.x = (int)(screenNormalPos.x * Camera.main.pixelWidth);
 				screenPixelPos.y = (int)(screenNormalPos.y * Camera.main.pixelHeight);
 				screenPixelPos.z = screenNormalPos.z + draggedObjectDepth;
-				
-				Vector3 newObjectPos = Camera.main.ScreenToWorldPoint(screenPixelPos) - draggedObjectOffset;
+				Vector3 newObjectPos = (Camera.main.ScreenToWorldPoint(screenPixelPos) - draggedObjectOffset);
+				newObjectPos.y = draggedObject.transform.position.y;
+				newObjectPos.z = draggedObject.transform.position.z;
+
 				draggedObject.transform.position = Vector3.Lerp(draggedObject.transform.position, newObjectPos, dragSpeed * Time.deltaTime);
 				
 				// check if the object (hand grip) was released
