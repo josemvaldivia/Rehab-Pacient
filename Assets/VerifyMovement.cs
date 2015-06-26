@@ -10,6 +10,7 @@ public class VerifyMovement : MonoBehaviour {
 	private Vector3 oldPosition;
 	private Vector3 translateVector = new Vector3 (3.0f, 0.0f , 0.0f);
 	public InteractionWrapper.InteractionHandEventType handEvent = InteractionWrapper.InteractionHandEventType.None;
+	public GameObject text;
 	// Use this for initialization
 	void Start () {
 		oldPosition = sourceObject.transform.position;
@@ -23,6 +24,7 @@ public class VerifyMovement : MonoBehaviour {
 	void Update () {
 		handEvent = (InteractionWrapper.InteractionHandEventType)InteractionWrapper.GetRightHandEvent();
 		Vector3 temp = sourceObject.transform.position;
+		text.transform.position = sourceObject.transform.position;
 		if (handEvent == InteractionWrapper.InteractionHandEventType.Release) {
 
 			if (sourceObject.transform.position.x < translateVector.x)
