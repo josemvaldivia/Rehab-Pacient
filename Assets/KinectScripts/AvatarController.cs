@@ -129,7 +129,9 @@ public class AvatarController : MonoBehaviour
         }
         
         // move the avatar to its Kinect position
-        MoveAvatar(UserID);
+        if (!loadMovement) {
+        	MoveAvatar(UserID);
+        }
 
         for (var boneIndex = 0; boneIndex < bones.Length; boneIndex++)
         {
