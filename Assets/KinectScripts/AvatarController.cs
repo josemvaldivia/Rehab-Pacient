@@ -156,6 +156,9 @@ public class AvatarController : MonoBehaviour
             }
         }
         frame++;
+        if (loadMovement && (frame >= framesJoints.Count) ) {
+        	frame = 0;
+        }
     }
     
     // Set bones to their initial positions and rotations
@@ -228,11 +231,7 @@ public class AvatarController : MonoBehaviour
         // Get Kinect joint orientation
         Quaternion jointRotation;
         if (loadMovement) {
-            if (frame < framesJoints.Count) {
-                jointRotation = ((Dictionary<int, Quaternion>)framesJoints[frame])[iJoint];
-            } else {
-                return;
-            }
+            jointRotation = ((Dictionary<int, Quaternion>)framesJoints[frame])[iJoint];
         } else {
             jointRotation = kinectManager.GetJointOrientation(userId, iJoint, flip);
         }

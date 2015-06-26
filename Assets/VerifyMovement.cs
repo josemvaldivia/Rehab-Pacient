@@ -30,13 +30,11 @@ public class VerifyMovement : MonoBehaviour {
 			if (sourceObject.transform.position.x < translateVector.x)
 			{
 				sourceObject.transform.position = oldPosition;
-				print ("nee");
 			}
 			else
 			{
 				Destroy(deleteObject);
 				Application.LoadLevel(index);
-				print ("ooo");
 			}
 		}
 

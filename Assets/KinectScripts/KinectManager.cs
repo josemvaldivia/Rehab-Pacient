@@ -1360,7 +1360,9 @@ public class KinectManager : MonoBehaviour
 					usersMapRect = new Rect(cameraRect.width - displayWidth, cameraRect.height, displayWidth, -displayHeight);
 				}
 
-				img.texture = usersLblTex;
+				if (img && usersLblTex) {
+					img.texture = usersLblTex;
+				}
 	            // GUI.DrawTexture(usersMapRect, usersLblTex);
 	        }
 
@@ -1401,7 +1403,9 @@ public class KinectManager : MonoBehaviour
 //					}
 				}
 
-				img.texture = usersLblTex;
+				if (img && usersLblTex) {
+					img.texture = usersLblTex;
+				}
 				// GUI.DrawTexture(usersClrRect, usersClrTex);
 			}
 		}
