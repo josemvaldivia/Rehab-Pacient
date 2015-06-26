@@ -6,30 +6,46 @@ public class VerifyMovement : MonoBehaviour {
 	
 	public GameObject sourceObject;
 	private Vector3 oldPosition;
-	private Vector3 translateVector = new Vector3 (10.0f, 0.0f , 0.0f);
-
+	private Vector3 translateVector = new Vector3 (3.0f, 0.0f , 0.0f);
+	public InteractionWrapper.InteractionHandEventType handEvent = InteractionWrapper.InteractionHandEventType.None;
 	// Use this for initialization
 	void Start () {
 		oldPosition = sourceObject.transform.position;
 		translateVector = oldPosition + translateVector;
+		print (translateVector);
+
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		handEvent = (InteractionWrapper.InteractionHandEventType)InteractionWrapper.GetRightHandEvent();
 		Vector3 temp = sourceObject.transform.position;
+		if (handEvent == InteractionWrapper.InteractionHandEventType.Release) {
+
+			if (sourceObject.transform.position.x < translateVector.x)
+			{
+				sourceObject.transform.position = oldPosition;
+				print ("nee");
+			}
+			else
+			{
+				print ("ooo");
+			}
+		}
+		/*
 		if (oldPosition.x < sourceObject.transform.position.x)
 		{
 
 			oldPosition = temp;
-			print("right");
+			//print("right");
 		}
 		else if (oldPosition.x > sourceObject.transform.position.x)
 		{
 			oldPosition = temp;
-			print ("left");
+			//print ("left");
 		}
-
+	*/
 
 	}
 }
