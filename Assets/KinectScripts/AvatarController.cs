@@ -18,6 +18,7 @@ public class AvatarController : MonoBehaviour
     public bool mirroredMovement = false;
     
     // Kike added this
+	public AudioClip voice;
     public bool recordMovement = false;
     public bool loadMovement = false;
     public string movementFilename = "";
@@ -166,6 +167,7 @@ public class AvatarController : MonoBehaviour
         frame++;
         if (loadMovement && (frame >= framesJoints.Count) ) {
         	frame = 0;
+			sw = Stopwatch.StartNew();
         }
     }
     
@@ -215,6 +217,10 @@ public class AvatarController : MonoBehaviour
     // Invoked on the successful calibration of a player.
     public void SuccessfulCalibration(uint userId)
     {
+		AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+		audioSource.clip = voice;
+		audioSource.volume = 1;
+		audioSource.Play ();
         // reset the models position
         if(offsetNode != null)
         {
