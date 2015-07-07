@@ -7,6 +7,9 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Text;
 
+using System.Diagnostics;
+using System.Threading;
+
 
 [RequireComponent(typeof(Animator))]
 public class AvatarController : MonoBehaviour
@@ -20,6 +23,8 @@ public class AvatarController : MonoBehaviour
     public string movementFilename = "";
     private int frame = 0;
     private ArrayList framesJoints = new ArrayList();
+	private ArrayList jointsTimes = new ArrayList();
+	private Stopwatch sw = Stopwatch.StartNew();
 
     // Bool that determines whether the avatar is allowed to move in vertical direction.
     public bool verticalMovement = false;
@@ -89,6 +94,7 @@ public class AvatarController : MonoBehaviour
                 BinaryReader reader = new BinaryReader(fs);
                 while (reader.BaseStream.Position != reader.BaseStream.Length) {
                     int myFrame = reader.ReadInt32();
+					float time = reader.ReadSingle();
                     int iJoint = reader.ReadInt32();
                     float w = reader.ReadSingle();
                     float x = reader.ReadSingle();
@@ -96,8 +102,10 @@ public class AvatarController : MonoBehaviour
                     float z = reader.ReadSingle();
                     if (myFrame == framesJoints.Count) {
                         framesJoints.Add(new Dictionary<int, Quaternion> ());
+						jointsTimes.Add(new Dictionary<int, float> ());
                     }
                     ((Dictionary<int, Quaternion>)framesJoints[framesJoints.Count - 1])[iJoint] = new Quaternion(x, y, z, w);
+					((Dictionary<int, float>)jointsTimes[framesJoints.Count - 1])[iJoint] = time;
                 }
             }
         }
@@ -230,8 +238,13 @@ public class AvatarController : MonoBehaviour
         
         // Get Kinect joint orientation
         Quaternion jointRotation;
+		float jointTime;
         if (loadMovement) {
             jointRotation = ((Dictionary<int, Quaternion>)framesJoints[frame])[iJoint];
+			jointTime = ((Dictionary<int, float>)jointsTimes[frame])[iJoint];
+			if (jointTime > sw.Elapsed.TotalMilliseconds) {
+				Thread.Sleep((int)(jointTime - sw.Elapsed.TotalMilliseconds));
+			}
         } else {
             jointRotation = kinectManager.GetJointOrientation(userId, iJoint, flip);
         }
@@ -241,6 +254,7 @@ public class AvatarController : MonoBehaviour
             {
                 BinaryWriter writer = new BinaryWriter(fs);
                 writer.Write(frame);
+				writer.Write((float)sw.Elapsed.TotalMilliseconds);
                 writer.Write(iJoint);
                 writer.Write(jointRotation.w);
                 writer.Write(jointRotation.x);
