@@ -109,6 +109,7 @@ public class AvatarController : MonoBehaviour
 					((Dictionary<int, float>)jointsTimes[framesJoints.Count - 1])[iJoint] = time;
                 }
             }
+			sw = Stopwatch.StartNew();
         }
 
         // inits the bones array
@@ -220,6 +221,8 @@ public class AvatarController : MonoBehaviour
 		AudioSource audioSource = gameObject.AddComponent<AudioSource>();
 		audioSource.clip = voice;
 		audioSource.volume = 1;
+		sw = Stopwatch.StartNew();
+		print ("holi");
 		audioSource.Play ();
         // reset the models position
         if(offsetNode != null)
